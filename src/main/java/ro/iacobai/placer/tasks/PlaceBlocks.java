@@ -129,6 +129,7 @@ public class PlaceBlocks {
                 }
                 DataHandler.save_position(dataHandler.namespacesKey_PosCurrent,data,current_pos);
                 DataHandler.save_int(dataHandler.namespaceKey_Task_Next_Time,data,TIME_l);
+                DataHandler.save_string(dataHandler.namespaceKey_Task_Last_Message,data,"");
                 run_t(player,TIME_l);
             }
         }.runTaskLater(plugin, TIME*20).getTaskId();
