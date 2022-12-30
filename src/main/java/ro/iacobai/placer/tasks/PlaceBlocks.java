@@ -38,22 +38,25 @@ public class PlaceBlocks {
 
                 }
                 else {
-                    //DataHandler.change_bool(dataHandler.namespaceKey_Pause,data,player,null);
+                    DataHandler.change_bool(dataHandler.namespaceKey_Pause,data,player,null);
                     player.sendMessage(ChatColor.RED+"The hopper is missing! So placer was paused!");
                     this.cancel();
                 }
                 if(new Chest().exists(chest_pos)){
-                    if(new Chest().has_items(chest_pos)){
-
-                    }
-                    else {
-                        //DataHandler.change_bool(dataHandler.namespaceKey_Pause,data,player,null);
-                        player.sendMessage(ChatColor.RED+"The chest has no items! So placer was paused!");
-                        this.cancel();
+                    if(material_current_block.isAir() || current_block.isLiquid()){
+                        Material item = new Chest().use_items(chest_pos);
+                        if(item != null){
+                            current_block.setType(item);
+                        }
+                        else {
+                            DataHandler.change_bool(dataHandler.namespaceKey_Pause,data,player,null);
+                            player.sendMessage(ChatColor.RED+"The chest has no items! So placer was paused!");
+                            this.cancel();
+                        }
                     }
                 }
                 else {
-                    //DataHandler.change_bool(dataHandler.namespaceKey_Pause,data,player,null);
+                    DataHandler.change_bool(dataHandler.namespaceKey_Pause,data,player,null);
                     player.sendMessage(ChatColor.RED+"The chest is missing! So placer was paused!");
                     this.cancel();
                 }

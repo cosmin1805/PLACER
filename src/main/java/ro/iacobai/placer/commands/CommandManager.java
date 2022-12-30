@@ -22,6 +22,8 @@ public class CommandManager implements CommandExecutor {
     public  CommandManager(){
         subcommands.add(new CancelCommand());
         subcommands.add(new ConfirmCommand());
+        subcommands.add(new PauseCommand());
+        subcommands.add(new ResumeCommand());
         subcommands.add(new SelectCommand());
         subcommands.add(new StartCommand());
         subcommands.add(new StatusCommand());
