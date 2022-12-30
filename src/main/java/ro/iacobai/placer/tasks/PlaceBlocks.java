@@ -34,21 +34,23 @@ public class PlaceBlocks {
                 Material material_hopper = hopper.getBlockData().getMaterial();
                 ItemStack fuel_item = null;
                 if(material_hopper.equals(Material.HOPPER)){
-                    Hopper hopper_data = (Hopper) hopper.getState();
-                    int fuel_add = new ro.iacobai.placer.blocks.Hopper().Fuel_check(hopper_data);
-                    if(fuel_add !=0){
-                        DataHandler.save_int(dataHandler.namespaceKey_Fuel,data,fuel_add);
-                    }
-                    int fuel =  DataHandler.get_int(dataHandler.namespaceKey_Fuel,data);
-                    if(fuel !=0){
-                        DataHandler.save_int(dataHandler.namespaceKey_Fuel,data,fuel-1);
-                    }
-                    else {
-                        DataHandler.change_bool(dataHandler.namespaceKey_Pause,data,player,null);
-                        player.sendMessage(ChatColor.DARK_RED+"---------------------");
-                        player.sendMessage(ChatColor.RED+"There is no fuel left! So placer was paused!");
-                        player.sendMessage(ChatColor.DARK_RED+"---------------------");
-                        this.cancel();
+                    if(material_current_block.isAir() || current_block.isLiquid()){
+                        Hopper hopper_data = (Hopper) hopper.getState();
+                        int fuel_add = new ro.iacobai.placer.blocks.Hopper().Fuel_check(hopper_data);
+                        if(fuel_add !=0){
+                            DataHandler.save_int(dataHandler.namespaceKey_Fuel,data,fuel_add);
+                        }
+                        int fuel =  DataHandler.get_int(dataHandler.namespaceKey_Fuel,data);
+                        if(fuel !=0){
+                            DataHandler.save_int(dataHandler.namespaceKey_Fuel,data,fuel-1);
+                        }
+                        else {
+                            DataHandler.change_bool(dataHandler.namespaceKey_Pause,data,player,null);
+                            player.sendMessage(ChatColor.DARK_RED+"---------------------");
+                            player.sendMessage(ChatColor.RED+"There is no fuel left! So placer was paused!");
+                            player.sendMessage(ChatColor.DARK_RED+"---------------------");
+                            this.cancel();
+                        }
                     }
                 }
                 else {
