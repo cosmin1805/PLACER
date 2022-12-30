@@ -23,6 +23,7 @@ public class DataHandler {
     public NamespacedKey namespacesKey_PosCurrent = new NamespacedKey(PLACER.getPlugin(),"placer_current_pos");
     //ALL THE INTEGERS AND DOUBLE DATA
     public NamespacedKey namespaceKey_Blocks_Remaining = new NamespacedKey(PLACER.getPlugin(),"placer_blocks_remaining");
+    public NamespacedKey namespaceKey_Fuel = new NamespacedKey(PLACER.getPlugin(),"placer_fuel");
     public NamespacedKey namespaceKey_Task_Id = new NamespacedKey(PLACER.getPlugin(),"placer_id");
     public NamespacedKey namespaceKey_Task_Particle_Id = new NamespacedKey(PLACER.getPlugin(),"placer_particle_id");
 

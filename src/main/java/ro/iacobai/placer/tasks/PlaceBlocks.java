@@ -15,7 +15,7 @@ import ro.iacobai.placer.data.DataHandler;
 
 public class PlaceBlocks {
     DataHandler dataHandler = new DataHandler();
-
+    PLACER placer = PLACER.getPlugin();
     public void run_t(Player player) {
         PersistentDataContainer data = player.getPersistentDataContainer();
         Location pos1 = DataHandler.get_position(dataHandler.namespaceKey_Pos1,data);
@@ -32,10 +32,22 @@ public class PlaceBlocks {
                 Material material_current_block = current_block.getBlockData().getMaterial();
                 Block hopper = hopper_pos.getBlock();
                 Material material_hopper = hopper.getBlockData().getMaterial();
-                ItemStack fuel = null;
+                ItemStack fuel_item = null;
                 if(material_hopper.equals(Material.HOPPER)){
                     Hopper hopper_data = (Hopper) hopper.getState();
-
+                    int fuel_add = new ro.iacobai.placer.blocks.Hopper().Fuel_check(hopper_data);
+                    if(fuel_add !=0){
+                        DataHandler.save_int(dataHandler.namespaceKey_Fuel,data,fuel_add);
+                    }
+                    int fuel =  DataHandler.get_int(dataHandler.namespaceKey_Fuel,data);
+                    if(fuel !=0){
+                        DataHandler.save_int(dataHandler.namespaceKey_Fuel,data,fuel-1);
+                    }
+                    else {
+                        DataHandler.change_bool(dataHandler.namespaceKey_Pause,data,player,null);
+                        player.sendMessage(ChatColor.RED+"There is no fuel left! So placer was paused!");
+                        this.cancel();
+                    }
                 }
                 else {
                     DataHandler.change_bool(dataHandler.namespaceKey_Pause,data,player,null);
@@ -97,7 +109,7 @@ public class PlaceBlocks {
                 }
                 DataHandler.save_position(dataHandler.namespacesKey_PosCurrent,data,current_pos);
             }
-        }.runTaskTimer(plugin, 20,20).getTaskId();
+        }.runTaskTimer(plugin, placer.getConfig().getInt("Time"),placer.getConfig().getInt("Time")*20).getTaskId();
         DataHandler.save_int(dataHandler.namespaceKey_Task_Id,data,ID);
     }
 }

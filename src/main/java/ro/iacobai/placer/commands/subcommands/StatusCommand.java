@@ -5,12 +5,13 @@ import org.bukkit.Location;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
 import org.bukkit.persistence.PersistentDataContainer;
+import ro.iacobai.placer.PLACER;
 import ro.iacobai.placer.commands.SubCommand;
 import ro.iacobai.placer.data.DataHandler;
 
 public class StatusCommand extends SubCommand {
     DataHandler dataHandler = new DataHandler();
-
+    PLACER placer = PLACER.getPlugin();
     @Override
     public String getName() {
         return "status";
@@ -40,6 +41,8 @@ public class StatusCommand extends SubCommand {
         location_send(dataHandler.namespacesKey_PosCurrent,data,player,"Current pos is: ");
         double number_of_blocks = DataHandler.get_double(dataHandler.namespaceKey_Blocks_Remaining,data);
         player.sendMessage("Blocks remaining: "+ChatColor.GREEN+number_of_blocks+" blocks");
+        player.sendMessage("Time remaining: "+ChatColor.GREEN+number_of_blocks*placer.getConfig().getInt("Time")+" seconds");
+        player.sendMessage("Fuel: "+ChatColor.GREEN+DataHandler.get_int(dataHandler.namespaceKey_Fuel,data));
         player.sendMessage(ChatColor.DARK_RED+"---------------------");
     }
     public static void on_off_send(NamespacedKey namespacedKey, PersistentDataContainer data, Player player, String message){
