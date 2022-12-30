@@ -1,0 +1,9 @@
+name: PLACER
+version: '${project.version}'
+main: ro.iacobai.placer.PLACER
+api-version: 1.19
+authors: [ Cosmin_Andrei ]
+website: iacobai.ro
+commands:
+  placer:
+    description: Placer main command
