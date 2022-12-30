@@ -43,7 +43,7 @@ public class Hopper {
                 Material material = item.getType();
                 if(material.isFuel()){
                     fuel+=value_fuel(material)*item.getAmount();
-                    hopper_data.getInventory().remove(item);
+                    hopper_data.getInventory().removeItem(new ItemStack(material, item.getAmount()));
                 }
             }
         }

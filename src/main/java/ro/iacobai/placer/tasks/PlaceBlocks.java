@@ -6,7 +6,6 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.Hopper;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.scheduler.BukkitRunnable;
 import ro.iacobai.placer.PLACER;
@@ -36,12 +35,12 @@ public class PlaceBlocks {
                     if(material_current_block.isAir() || current_block.isLiquid()){
                         Hopper hopper_data = (Hopper) hopper.getState();
                         int fuel_add = new ro.iacobai.placer.blocks.Hopper().Fuel_check(hopper_data);
-                        if(fuel_add !=0){
-                            DataHandler.save_int(dataHandler.namespaceKey_Fuel,data,fuel_add);
-                        }
                         int fuel =  DataHandler.get_int(dataHandler.namespaceKey_Fuel,data);
-                        if(fuel !=0 && DataHandler.get_int(dataHandler.namespaceKey_Overclock,data) + 1 <= fuel){
-                            DataHandler.save_int(dataHandler.namespaceKey_Fuel,data,fuel-(1+DataHandler.get_int(dataHandler.namespaceKey_Overclock,data)));
+                        if(fuel_add !=0){
+                            DataHandler.save_int(dataHandler.namespaceKey_Fuel,data,fuel_add+fuel);
+                        }
+                        if(fuel + fuel_add !=0 && DataHandler.get_int(dataHandler.namespaceKey_Overclock,data) + 1 <= fuel+fuel_add){
+                            DataHandler.save_int(dataHandler.namespaceKey_Fuel,data,fuel+fuel_add-(1+DataHandler.get_int(dataHandler.namespaceKey_Overclock,data)));
                         }
                         else {
                             DataHandler.change_bool(dataHandler.namespaceKey_Pause,data,player,null);

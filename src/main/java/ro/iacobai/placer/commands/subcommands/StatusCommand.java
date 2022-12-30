@@ -44,7 +44,6 @@ public class StatusCommand extends SubCommand {
         player.sendMessage("Time remaining: "+ChatColor.GREEN+number_of_blocks*(placer.getConfig().getInt("Time")-(DataHandler.get_int(dataHandler.namespaceKey_Overclock,data)+1))+" seconds");
         player.sendMessage("Fuel: "+ChatColor.GREEN+DataHandler.get_int(dataHandler.namespaceKey_Fuel,data));
         player.sendMessage("Overclock: "+ChatColor.GREEN+DataHandler.get_int(dataHandler.namespaceKey_Overclock,data));
-        System.out.println(DataHandler.get_string(dataHandler.namespaceKey_Task_Last_Message,data));
         player.sendMessage("Last message: "+ChatColor.GREEN+DataHandler.get_string(dataHandler.namespaceKey_Task_Last_Message,data));
         player.sendMessage(ChatColor.DARK_RED+"---------------------");
     }
