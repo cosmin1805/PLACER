@@ -1,5 +1,6 @@
 package ro.iacobai.placer.commands.subcommands;
 
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.persistence.PersistentDataContainer;
 import ro.iacobai.placer.commands.SubCommand;
@@ -25,7 +26,8 @@ public class SelectCommand extends SubCommand {
     @Override
     public void perform(Player player, String[] args) {
         PersistentDataContainer data = player.getPersistentDataContainer();
+        player.sendMessage(ChatColor.DARK_RED+"---------------------");
         DataHandler.change_bool(dataHandler.namespacesKey_Pos_Select,data,player,"Placer position selector ");
-
+        player.sendMessage(ChatColor.DARK_RED+"---------------------");
     }
 }

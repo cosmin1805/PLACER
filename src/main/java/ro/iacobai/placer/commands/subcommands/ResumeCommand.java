@@ -31,10 +31,14 @@ public class ResumeCommand extends SubCommand {
         if(DataHandler.get_bool(dataHandler.namespaceKey_Pause,data)==1 && DataHandler.get_bool(dataHandler.namespaceKey_Running,data)==1){
             DataHandler.change_bool(dataHandler.namespaceKey_Pause,data,player,null);
             placeBlocks.run_t(player);
+            player.sendMessage(ChatColor.DARK_RED+"---------------------");
             player.sendMessage(ChatColor.GREEN+"Placer resumed!");
+            player.sendMessage(ChatColor.DARK_RED+"---------------------");
         }
         else {
+            player.sendMessage(ChatColor.DARK_RED+"---------------------");
             player.sendMessage(ChatColor.RED+"Nothing to resume!");
+            player.sendMessage(ChatColor.DARK_RED+"---------------------");
         }
     }
 }

@@ -72,27 +72,31 @@ public class ItemManager implements Listener {
             if(DataHandler.get_bool(dataHandler.namespacesKey_Pos_Select,data) == 1){
                 if (material.equals(Material.CHEST)) {
                     DataHandler.save_position(dataHandler.namespaceKey_PosChest,data,blockLocation);
-                    player.sendMessage(ChatColor.AQUA+"---------------------");
+                    player.sendMessage(ChatColor.DARK_RED+"---------------------");
                     player.sendMessage(ChatColor.GREEN + "CHEST SELECTED!");
                     player.sendMessage(ChatColor.WHITE + "CHEST POS: " + blockLocation.getBlockX() + " " + blockLocation.getBlockY() + " " + blockLocation.getBlockZ());
-                    player.sendMessage(ChatColor.AQUA+"---------------------");
+                    player.sendMessage(ChatColor.DARK_RED+"---------------------");
                     return;
                 }
                 if (material.equals(Material.HOPPER)) {
                     DataHandler.save_position(dataHandler.namespaceKey_PosHopper,data,blockLocation);
-                    player.sendMessage(ChatColor.AQUA+"---------------------");
+                    player.sendMessage(ChatColor.DARK_RED+"---------------------");
                     player.sendMessage(ChatColor.GREEN + "HOPPER SELECTED!");
                     player.sendMessage(ChatColor.WHITE + "HOPPER POS: " + blockLocation.getBlockX() + " " + blockLocation.getBlockY() + " " + blockLocation.getBlockZ());
-                    player.sendMessage(ChatColor.AQUA+"---------------------");
+                    player.sendMessage(ChatColor.DARK_RED+"---------------------");
                     return;
                 }
                 if(action.equals(Action.LEFT_CLICK_BLOCK)){
                     DataHandler.save_position(dataHandler.namespaceKey_Pos1,data,blockLocation);
+                    player.sendMessage(ChatColor.DARK_RED+"---------------------");
                     StatusCommand.location_send(dataHandler.namespaceKey_Pos1,data,player,"Pos1: ");
+                    player.sendMessage(ChatColor.DARK_RED+"---------------------");
                 }
                 else {
                     DataHandler.save_position(dataHandler.namespaceKey_Pos2,data,blockLocation);
+                    player.sendMessage(ChatColor.DARK_RED+"---------------------");
                     StatusCommand.location_send(dataHandler.namespaceKey_Pos2,data,player,"Pos2: ");
+                    player.sendMessage(ChatColor.DARK_RED+"---------------------");
                 }
             }
         }

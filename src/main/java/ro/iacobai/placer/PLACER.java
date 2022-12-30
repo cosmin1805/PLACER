@@ -36,7 +36,9 @@ public final class PLACER extends JavaPlugin {
                 PlaceBlocks placeBlocks = new PlaceBlocks();
                 placeBlocks.run_t(player);
                 System.out.println("Task of " +player.getName()+" resumed!");
+                player.sendMessage(ChatColor.DARK_RED+"---------------------");
                 player.sendMessage(ChatColor.GREEN+"Your Placer Task was resumed!");
+                player.sendMessage(ChatColor.DARK_RED+"---------------------");
             }
             if(DataHandler.get_bool(dataHandler.namespaceKey_Highlight,data)==1){
                 Particles particles = new Particles();

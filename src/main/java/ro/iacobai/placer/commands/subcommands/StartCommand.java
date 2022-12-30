@@ -37,12 +37,12 @@ public class StartCommand extends SubCommand {
         int w = (int)(abs(abs(pos1.getZ()) - abs(pos2.getZ())))+1;
         double number_of_blocks = h*l*w;
         DataHandler.save_double(dataHandler.namespaceKey_Blocks_Remaining,data,number_of_blocks);
-        player.sendMessage(ChatColor.AQUA+"---------------------");
+        player.sendMessage(ChatColor.DARK_RED+"---------------------");
         location_send(dataHandler.namespaceKey_Pos1,data,player,"Pos1 is: ");
         location_send(dataHandler.namespaceKey_Pos2,data,player,"Pos2 is: ");
         player.sendMessage("This will place : "+ ChatColor.GREEN+number_of_blocks+" blocks");
         player.sendMessage("Confirm this with /placer confirm!");
-        player.sendMessage(ChatColor.AQUA+"---------------------");
+        player.sendMessage(ChatColor.DARK_RED+"---------------------");
         DataHandler.change_bool(dataHandler.namespaceKey_Await_Confirm,data,player,null);
 
     }

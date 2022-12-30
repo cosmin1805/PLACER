@@ -19,7 +19,9 @@ public class OnJoin implements Listener {
             PlaceBlocks placeBlocks = new PlaceBlocks();
             placeBlocks.run_t(player);
             System.out.println("Task placer of " +player.getName()+" resumed!");
+            player.sendMessage(ChatColor.DARK_RED+"---------------------");
             player.sendMessage(ChatColor.GREEN+"Your Placer Task was resumed!");
+            player.sendMessage(ChatColor.DARK_RED+"---------------------");
         }
     }
 }

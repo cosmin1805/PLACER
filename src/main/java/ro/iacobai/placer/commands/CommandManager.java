@@ -45,12 +45,14 @@ public class CommandManager implements CommandExecutor {
                     String[] blocked_commands= {"select","start"};
                     for (int i = 0; i < blocked_commands.length; i++){
                         if(args[0].equalsIgnoreCase(blocked_commands[i])){
+                            p.sendMessage(ChatColor.DARK_RED+"---------------------");
                             if(DataHandler.get_bool(dataHandler.namespaceKey_Running,data)==1){
                                 p.sendMessage(ChatColor.RED+"Can't run this command! Please cancel your current placer with /placer cancel or wait for it to finish!");
                             }
                             else {
                                 p.sendMessage(ChatColor.RED+"Can't run this command! Please confirm yor current selection with /placer confirm or cancel it with /placer cancel !");
                             }
+                            p.sendMessage(ChatColor.DARK_RED+"---------------------");
                             return true;
                         }
                     }

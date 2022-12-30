@@ -30,10 +30,14 @@ public class PauseCommand extends SubCommand {
         if(DataHandler.get_bool(dataHandler.namespaceKey_Pause,data)==0 && DataHandler.get_bool(dataHandler.namespaceKey_Running,data)==1){
             Bukkit.getScheduler().cancelTask(DataHandler.get_int(dataHandler.namespaceKey_Task_Id,data));
             DataHandler.change_bool(dataHandler.namespaceKey_Pause,data,player,null);
+            player.sendMessage(ChatColor.DARK_RED+"---------------------");
             player.sendMessage(ChatColor.GREEN+"The placer has been paused!");
+            player.sendMessage(ChatColor.DARK_RED+"---------------------");
         }
         else {
+            player.sendMessage(ChatColor.DARK_RED+"---------------------");
             player.sendMessage(ChatColor.RED+"Nothing to pause or the placer is already paused!");
+            player.sendMessage(ChatColor.DARK_RED+"---------------------");
         }
     }
 }
