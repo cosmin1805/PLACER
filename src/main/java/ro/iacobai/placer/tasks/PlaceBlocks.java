@@ -45,13 +45,17 @@ public class PlaceBlocks {
                     }
                     else {
                         DataHandler.change_bool(dataHandler.namespaceKey_Pause,data,player,null);
+                        player.sendMessage(ChatColor.DARK_RED+"---------------------");
                         player.sendMessage(ChatColor.RED+"There is no fuel left! So placer was paused!");
+                        player.sendMessage(ChatColor.DARK_RED+"---------------------");
                         this.cancel();
                     }
                 }
                 else {
                     DataHandler.change_bool(dataHandler.namespaceKey_Pause,data,player,null);
+                    player.sendMessage(ChatColor.DARK_RED+"---------------------");
                     player.sendMessage(ChatColor.RED+"The hopper is missing! So placer was paused!");
+                    player.sendMessage(ChatColor.DARK_RED+"---------------------");
                     this.cancel();
                 }
                 if(new Chest().exists(chest_pos)){
@@ -62,14 +66,18 @@ public class PlaceBlocks {
                         }
                         else {
                             DataHandler.change_bool(dataHandler.namespaceKey_Pause,data,player,null);
+                            player.sendMessage(ChatColor.DARK_RED+"---------------------");
                             player.sendMessage(ChatColor.RED+"The chest has no items! So placer was paused!");
+                            player.sendMessage(ChatColor.DARK_RED+"---------------------");
                             this.cancel();
                         }
                     }
                 }
                 else {
                     DataHandler.change_bool(dataHandler.namespaceKey_Pause,data,player,null);
+                    player.sendMessage(ChatColor.DARK_RED+"---------------------");
                     player.sendMessage(ChatColor.RED+"The chest is missing! So placer was paused!");
+                    player.sendMessage(ChatColor.DARK_RED+"---------------------");
                     this.cancel();
                 }
                 double blocks = DataHandler.get_double(dataHandler.namespaceKey_Blocks_Remaining,data) - 1;
@@ -77,7 +85,9 @@ public class PlaceBlocks {
                 //STOP IF CURRENT POS IS POS2
                 if(current_pos.getX()==pos2.getX() && current_pos.getY()==pos2.getY() && current_pos.getZ()==pos2.getZ()) {
                     DataHandler.change_bool(dataHandler.namespaceKey_Running,data,player,null);
+                    player.sendMessage(ChatColor.DARK_RED+"---------------------");
                     player.sendMessage(ChatColor.GREEN+"Placer has finished!");
+                    player.sendMessage(ChatColor.DARK_RED+"---------------------");
                     this.cancel();
                 }
                 //MOKVE THE CURRENT BLOCK
