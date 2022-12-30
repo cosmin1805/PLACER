@@ -32,9 +32,9 @@ public class CancelCommand extends SubCommand {
         }
         else if (DataHandler.get_bool(dataHandler.namespaceKey_Running,data)==1){
             DataHandler.change_bool(dataHandler.namespaceKey_Await_Confirm,data,player,null);
-            player.sendMessage(ChatColor.AQUA+"---------------------");
+            player.sendMessage(ChatColor.DARK_RED+"---------------------");
             player.sendMessage("Confirm this with /placer confirm or cancel it with /placer cancel !");
-            player.sendMessage(ChatColor.AQUA+"---------------------");
+            player.sendMessage(ChatColor.DARK_RED+"---------------------");
         }
         else {
             player.sendMessage(ChatColor.RED+"Nothing to cancel !");

@@ -23,6 +23,7 @@ public class CommandManager implements CommandExecutor {
         subcommands.add(new CancelCommand());
         subcommands.add(new ConfirmCommand());
         subcommands.add(new PauseCommand());
+        subcommands.add(new ParticleCommand());
         subcommands.add(new ResumeCommand());
         subcommands.add(new SelectCommand());
         subcommands.add(new StartCommand());
@@ -34,11 +35,11 @@ public class CommandManager implements CommandExecutor {
             Player p = (Player) sender;
             PersistentDataContainer data = p.getPersistentDataContainer();
             if(args.length == 0){
-                p.sendMessage(ChatColor.AQUA+"---------------------");
+                p.sendMessage(ChatColor.DARK_RED+"---------------------");
                 for (int i = 0; i < getSubcommands().size(); i++){
                     p.sendMessage(getSubcommands().get(i).getSyntax()+" - "+getSubcommands().get(i).getDescription());
                 }
-                p.sendMessage(ChatColor.AQUA+"---------------------");
+                p.sendMessage(ChatColor.DARK_RED+"---------------------");
             } else if (args.length > 0) {
                 if(DataHandler.get_bool(dataHandler.namespaceKey_Await_Confirm,data) == 1 || DataHandler.get_bool(dataHandler.namespaceKey_Running,data) == 1){
                     String[] blocked_commands= {"select","start"};

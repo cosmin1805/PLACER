@@ -29,7 +29,7 @@ public class StatusCommand extends SubCommand {
     @Override
     public void perform(Player player, String[] args) {
         PersistentDataContainer data = player.getPersistentDataContainer();
-        player.sendMessage(ChatColor.AQUA+"---------------------");
+        player.sendMessage(ChatColor.DARK_RED+"---------------------");
         on_off_send(dataHandler.namespacesKey_Pos_Select,data,player,"Positions selector: ");
         location_send(dataHandler.namespaceKey_Pos1,data,player,"Pos1 is: ");
         location_send(dataHandler.namespaceKey_Pos2,data,player,"Pos2 is: ");
@@ -40,7 +40,7 @@ public class StatusCommand extends SubCommand {
         location_send(dataHandler.namespacesKey_PosCurrent,data,player,"Current pos is: ");
         double number_of_blocks = DataHandler.get_double(dataHandler.namespaceKey_Blocks_Remaining,data);
         player.sendMessage("Blocks remaining: "+ChatColor.GREEN+number_of_blocks+" blocks");
-        player.sendMessage(ChatColor.AQUA+"---------------------");
+        player.sendMessage(ChatColor.DARK_RED+"---------------------");
     }
     public static void on_off_send(NamespacedKey namespacedKey, PersistentDataContainer data, Player player, String message){
         if(DataHandler.get_bool(namespacedKey,data)==1){
