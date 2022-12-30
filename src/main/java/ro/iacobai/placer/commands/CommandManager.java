@@ -24,6 +24,7 @@ public class CommandManager implements CommandExecutor {
         subcommands.add(new ConfirmCommand());
         subcommands.add(new PauseCommand());
         subcommands.add(new ParticleCommand());
+        subcommands.add(new OverclockCommand());
         subcommands.add(new ResumeCommand());
         subcommands.add(new SelectCommand());
         subcommands.add(new StartCommand());

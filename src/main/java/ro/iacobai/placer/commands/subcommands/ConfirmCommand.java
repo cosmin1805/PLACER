@@ -5,12 +5,14 @@ import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.persistence.PersistentDataContainer;
+import ro.iacobai.placer.PLACER;
 import ro.iacobai.placer.commands.SubCommand;
 import ro.iacobai.placer.data.DataHandler;
 import ro.iacobai.placer.tasks.PlaceBlocks;
 
 public class ConfirmCommand extends SubCommand {
     DataHandler dataHandler = new DataHandler();
+    PLACER placer = PLACER.getPlugin();
     @Override
     public String getName() {
         return "confirm";
@@ -52,7 +54,7 @@ public class ConfirmCommand extends SubCommand {
             PlaceBlocks placeBlocks = new PlaceBlocks();
             DataHandler.change_bool(dataHandler.namespaceKey_Running,data,player,null);
             DataHandler.save_position(dataHandler.namespacesKey_PosCurrent,data,pos1);
-            placeBlocks.run_t(player);
+            placeBlocks.run_t(player,placer.getConfig().getInt("Time"));
             DataHandler.change_bool(dataHandler.namespaceKey_Await_Confirm,data,player,null);
         }else {
             player.sendMessage(ChatColor.DARK_RED+"---------------------");

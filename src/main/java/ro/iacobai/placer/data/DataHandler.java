@@ -24,8 +24,12 @@ public class DataHandler {
     //ALL THE INTEGERS AND DOUBLE DATA
     public NamespacedKey namespaceKey_Blocks_Remaining = new NamespacedKey(PLACER.getPlugin(),"placer_blocks_remaining");
     public NamespacedKey namespaceKey_Fuel = new NamespacedKey(PLACER.getPlugin(),"placer_fuel");
+    public NamespacedKey namespaceKey_Overclock = new NamespacedKey(PLACER.getPlugin(),"placer_overclock");
+    public NamespacedKey namespaceKey_Task_Next_Time = new NamespacedKey(PLACER.getPlugin(),"placer_next_block_time");
     public NamespacedKey namespaceKey_Task_Id = new NamespacedKey(PLACER.getPlugin(),"placer_id");
     public NamespacedKey namespaceKey_Task_Particle_Id = new NamespacedKey(PLACER.getPlugin(),"placer_particle_id");
+    //string
+    public NamespacedKey namespaceKey_Task_Last_Message= new NamespacedKey(PLACER.getPlugin(),"placer_last_message");
 
     public static void change_bool(NamespacedKey namespacedKey, PersistentDataContainer data, Player player, String message) {
         if (!data.has(namespacedKey, PersistentDataType.INTEGER)) {
@@ -87,10 +91,21 @@ public class DataHandler {
     public static int get_int(NamespacedKey namespacedKey, PersistentDataContainer data){
         if (!data.has(namespacedKey, PersistentDataType.INTEGER)) {
             int value = 0;
-            save_double(namespacedKey,data,value);
+            save_int(namespacedKey,data,value);
             return value;
         }
         int value = data.get(namespacedKey, PersistentDataType.INTEGER);
+        return value;
+    }
+    public static void save_string(NamespacedKey namespacedKey, PersistentDataContainer data,String value){
+        data.set(namespacedKey, PersistentDataType.STRING, value);
+    }
+    public static String get_string(NamespacedKey namespacedKey, PersistentDataContainer data){
+        if (!data.has(namespacedKey, PersistentDataType.STRING)) {
+            save_string(namespacedKey,data,"");
+            return "";
+        }
+        String value = data.get(namespacedKey, PersistentDataType.STRING);
         return value;
     }
 }

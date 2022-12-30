@@ -16,7 +16,7 @@ import ro.iacobai.placer.data.DataHandler;
 public class PlaceBlocks {
     DataHandler dataHandler = new DataHandler();
     PLACER placer = PLACER.getPlugin();
-    public void run_t(Player player) {
+    public void run_t(Player player,int TIME) {
         PersistentDataContainer data = player.getPersistentDataContainer();
         Location pos1 = DataHandler.get_position(dataHandler.namespaceKey_Pos1,data);
         Location pos2 = DataHandler.get_position(dataHandler.namespaceKey_Pos2,data);
@@ -32,7 +32,6 @@ public class PlaceBlocks {
                 Material material_current_block = current_block.getBlockData().getMaterial();
                 Block hopper = hopper_pos.getBlock();
                 Material material_hopper = hopper.getBlockData().getMaterial();
-                ItemStack fuel_item = null;
                 if(material_hopper.equals(Material.HOPPER)){
                     if(material_current_block.isAir() || current_block.isLiquid()){
                         Hopper hopper_data = (Hopper) hopper.getState();
@@ -41,15 +40,16 @@ public class PlaceBlocks {
                             DataHandler.save_int(dataHandler.namespaceKey_Fuel,data,fuel_add);
                         }
                         int fuel =  DataHandler.get_int(dataHandler.namespaceKey_Fuel,data);
-                        if(fuel !=0){
-                            DataHandler.save_int(dataHandler.namespaceKey_Fuel,data,fuel-1);
+                        if(fuel !=0 && DataHandler.get_int(dataHandler.namespaceKey_Overclock,data) + 1 <= fuel){
+                            DataHandler.save_int(dataHandler.namespaceKey_Fuel,data,fuel-(1+DataHandler.get_int(dataHandler.namespaceKey_Overclock,data)));
                         }
                         else {
                             DataHandler.change_bool(dataHandler.namespaceKey_Pause,data,player,null);
                             player.sendMessage(ChatColor.DARK_RED+"---------------------");
                             player.sendMessage(ChatColor.RED+"There is no fuel left! So placer was paused!");
                             player.sendMessage(ChatColor.DARK_RED+"---------------------");
-                            this.cancel();
+                            DataHandler.save_string(dataHandler.namespaceKey_Task_Last_Message,data,"There is no fuel left! So placer was paused!");
+                            return;
                         }
                     }
                 }
@@ -58,7 +58,8 @@ public class PlaceBlocks {
                     player.sendMessage(ChatColor.DARK_RED+"---------------------");
                     player.sendMessage(ChatColor.RED+"The hopper is missing! So placer was paused!");
                     player.sendMessage(ChatColor.DARK_RED+"---------------------");
-                    this.cancel();
+                    DataHandler.save_string(dataHandler.namespaceKey_Task_Last_Message,data,"The hopper is missing! So placer was paused!");
+                    return;
                 }
                 if(new Chest().exists(chest_pos)){
                     if(material_current_block.isAir() || current_block.isLiquid()){
@@ -71,7 +72,8 @@ public class PlaceBlocks {
                             player.sendMessage(ChatColor.DARK_RED+"---------------------");
                             player.sendMessage(ChatColor.RED+"The chest has no items! So placer was paused!");
                             player.sendMessage(ChatColor.DARK_RED+"---------------------");
-                            this.cancel();
+                            DataHandler.save_string(dataHandler.namespaceKey_Task_Last_Message,data,"The chest has no items! So placer was paused!");
+                            return;
                         }
                     }
                 }
@@ -80,7 +82,8 @@ public class PlaceBlocks {
                     player.sendMessage(ChatColor.DARK_RED+"---------------------");
                     player.sendMessage(ChatColor.RED+"The chest is missing! So placer was paused!");
                     player.sendMessage(ChatColor.DARK_RED+"---------------------");
-                    this.cancel();
+                    DataHandler.save_string(dataHandler.namespaceKey_Task_Last_Message,data,"The chest is missing! So placer was paused!");
+                    return;
                 }
                 double blocks = DataHandler.get_double(dataHandler.namespaceKey_Blocks_Remaining,data) - 1;
                 DataHandler.save_double(dataHandler.namespaceKey_Blocks_Remaining,data,blocks);
@@ -90,7 +93,8 @@ public class PlaceBlocks {
                     player.sendMessage(ChatColor.DARK_RED+"---------------------");
                     player.sendMessage(ChatColor.GREEN+"Placer has finished!");
                     player.sendMessage(ChatColor.DARK_RED+"---------------------");
-                    this.cancel();
+                    DataHandler.save_string(dataHandler.namespaceKey_Task_Last_Message,data,"Placer has finished!");
+                    return;
                 }
                 //MOKVE THE CURRENT BLOCK
                 else if(current_pos.getX()==pos2.getX()  && current_pos.getZ()==pos2.getZ()){
@@ -119,9 +123,15 @@ public class PlaceBlocks {
                         current_pos.setZ(current_pos.getZ()+1);
                     }
                 }
+                int TIME_l = 0;
+                if(current_pos.getBlock().getType().isAir() || current_pos.getBlock().isLiquid()){
+                    TIME_l = placer.getConfig().getInt("Time") - (DataHandler.get_int(dataHandler.namespaceKey_Overclock,data)+1);
+                }
                 DataHandler.save_position(dataHandler.namespacesKey_PosCurrent,data,current_pos);
+                DataHandler.save_int(dataHandler.namespaceKey_Task_Next_Time,data,TIME_l);
+                run_t(player,TIME_l);
             }
-        }.runTaskTimer(plugin, placer.getConfig().getInt("Time"),placer.getConfig().getInt("Time")*20).getTaskId();
+        }.runTaskLater(plugin, TIME*20).getTaskId();
         DataHandler.save_int(dataHandler.namespaceKey_Task_Id,data,ID);
     }
 }

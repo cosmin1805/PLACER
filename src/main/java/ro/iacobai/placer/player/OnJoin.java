@@ -17,7 +17,7 @@ public class OnJoin implements Listener {
         PersistentDataContainer data = player.getPersistentDataContainer();
         if(DataHandler.get_bool(dataHandler.namespaceKey_Running,data)==1 && DataHandler.get_bool(dataHandler.namespaceKey_Pause,data)==0){
             PlaceBlocks placeBlocks = new PlaceBlocks();
-            placeBlocks.run_t(player);
+            placeBlocks.run_t(player,DataHandler.get_int(dataHandler.namespaceKey_Task_Next_Time,data));
             System.out.println("Task placer of " +player.getName()+" resumed!");
             player.sendMessage(ChatColor.DARK_RED+"---------------------");
             player.sendMessage(ChatColor.GREEN+"Your Placer Task was resumed!");
