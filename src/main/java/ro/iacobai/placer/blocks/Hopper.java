@@ -44,6 +44,9 @@ public class Hopper {
                 if(material.isFuel()){
                     fuel+=value_fuel(material)*item.getAmount();
                     hopper_data.getInventory().removeItem(new ItemStack(material, item.getAmount()));
+                    if(material.equals(Material.LAVA_BUCKET)){
+                        hopper_data.getInventory().addItem(new ItemStack(Material.BUCKET, item.getAmount()));
+                    }
                 }
             }
         }
