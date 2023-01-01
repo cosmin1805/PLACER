@@ -62,7 +62,7 @@ public class PlaceBlocks {
                 }
                 if(new Chest().exists(chest_pos)){
                     if(material_current_block.isAir() || current_block.isLiquid()){
-                        Material item = new Chest().use_items(chest_pos);
+                        Material item = new Chest().use_items(chest_pos,current_block);
                         if(item != null){
                             current_block.setType(item);
                         }
