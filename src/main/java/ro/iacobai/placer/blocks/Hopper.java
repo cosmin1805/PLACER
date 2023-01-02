@@ -2,7 +2,6 @@ package ro.iacobai.placer.blocks;
 
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.Damageable;
 
 public class Hopper {
     public enum Fuel {

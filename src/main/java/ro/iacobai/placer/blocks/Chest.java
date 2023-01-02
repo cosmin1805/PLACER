@@ -3,8 +3,8 @@ package ro.iacobai.placer.blocks;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.block.data.BlockData;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.Damageable;
 
 
 public class Chest {
@@ -21,7 +21,8 @@ public class Chest {
         for(int i = 0;i<items.length;i++){
             if(items[i]!=null){
                 Material material = items[i].getType();
-                if(current_block.canPlace(items[i].getType().createBlockData())){
+                BlockData blockData = items[i].getType().createBlockData();
+                if(current_block.canPlace(blockData)){
                     items[i].setAmount(items[i].getAmount()-1);
                     return material;
                 }

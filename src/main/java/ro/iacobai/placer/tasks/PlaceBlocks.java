@@ -4,11 +4,17 @@ import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
 import org.bukkit.block.Hopper;
+import org.bukkit.block.data.BlockData;
+import org.bukkit.block.data.Directional;
+import org.bukkit.block.data.MultipleFacing;
+import org.bukkit.block.data.type.GlassPane;
 import org.bukkit.entity.Player;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.scheduler.BukkitRunnable;
 import ro.iacobai.placer.PLACER;
+import ro.iacobai.placer.blocks.Block_c;
 import ro.iacobai.placer.blocks.Chest;
 import ro.iacobai.placer.data.DataHandler;
 
@@ -64,7 +70,10 @@ public class PlaceBlocks {
                     if(material_current_block.isAir() || current_block.isLiquid()){
                         Material item = new Chest().use_items(chest_pos,current_block);
                         if(item != null){
-                            current_block.setType(item);
+                            current_block.setType(item,true);
+                            if(current_pos.getBlock().getBlockData() instanceof MultipleFacing){
+                                Block_c.change_orientation(current_pos);
+                            }
                         }
                         else {
                             DataHandler.change_bool(dataHandler.namespaceKey_Pause,data,player,null);
